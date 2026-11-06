@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101116">
+<title>Валера AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101116;color:#fff;font-family:Arial,sans-serif}
+header{padding:20px;border-bottom:1px solid #292c37;font-size:21px;font-weight:bold}
+main{max-width:700px;margin:auto;padding:20px}
+.welcome{text-align:center;margin-top:20vh}
+.welcome h1{font-size:28px}
+.welcome p{color:#999;line-height:1.5}
+.chat{padding-bottom:100px}
+.msg{padding:13px 16px;margin:12px 0;border-radius:16px;line-height:1.5;white-space:pre-wrap}
+.user{background:#51418a;margin-left:15%}
+.bot{background:#20222b;margin-right:15%}
+form{position:fixed;bottom:15px;left:12px;right:12px;display:flex;gap:8px;background:#20222b;padding:10px;border-radius:17px}
+input{flex:1;min-width:0;background:transparent;border:0;color:white;font-size:16px;outline:none}
+button{border:0;border-radius:12px;padding:12px;background:#a78bfa;color:#171321;font-weight:bold}
+</style>
+</head>
+<body>
+<header>✦ Валера AI</header>
+<main>
+<div class="welcome" id="welcome">
+<h1>Ну что, погнали?</h1>
+<p>Твой личный ИИ-помощник. Скоро здесь появятся умный чат, анализ фото и документов.</p>
+</div>
+<div class="chat" id="chat"></div>
+</main>
+<form id="form">
+<input id="msg" placeholder="Напиши Валере..." autocomplete="off">
+<button>↑</button>
+</form>
+<script>
+const chat=document.getElementById('chat');
+const form=document.getElementById('form');
+const input=document.getElementById('msg');
+document.getElementById('welcome');
+form.addEventListener('submit',e=>{
+e.preventDefault();
+let t=input.value.trim();
+if(!t)return;
+document.getElementById('welcome').style.display='none';
+let m=document.createElement('div');
+m.className='msg user';
+m.textContent=t;
+chat.appendChild(m);
+let a=document.createElement('div');
+a.className='msg bot';
+a.textContent='Я на связи! Подключение настоящего ИИ добавим следующим этапом.';
+chat.appendChild(a);
+input.value='';
+localStorage.setItem('valera-chat',chat.innerHTML);
+});
+chat.innerHTML=localStorage.getItem('valera-chat')||'';
+</script>
+</body>
+</html>
